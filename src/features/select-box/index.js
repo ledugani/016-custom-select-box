@@ -3,6 +3,7 @@ import './styles.css';
 
 class SelectBox extends React.Component {
   state =  {
+    ...this.props,
     items: this.props.items || [],
     showItems: false,
     selectedItem: this.props.items && this.props.items[0]
@@ -22,30 +23,43 @@ class SelectBox extends React.Component {
   render() {
     return <div>
       <div
-        className="select-box--container"
+        className="select-box--box"
+      style={{width: this.state.width || 180}}
       >
-        <div className="select-box--selected-item">
-          { this.state.selectedItem.value }
-        </div>
         <div
-          className="select-box--arrow"
-          onClick={this.dropDown}
+          className="select-box--container"
         >
-          <span className={`${this.state.showItems ? 'select-box-arrow-up' :
-          'select-box--arrow-down'}`} />
-        </div>
-        <div style={{display: this.state.showItems ? 'block' : 'none'}}>
-          {
-            this.state.items.map(item => <div
-              key={ item.id }
-              onClick={() => this.selectItem(item)}
-              className={this.state.selectedItem === item ? 'selected' : ''}
-            >
-              { item.value }
-            </div>)
-          }
+          <div className="select-box--selected-item">
+            { this.state.selectedItem.value }
+          </div>
+          <div
+            className="select-box--arrow"
+            onClick={this.dropDown}
+          >
+            <span className={`${this.state.showItems ? 'select-box-arrow-up' :
+            'select-box--arrow-down'}`} />
+          </div>
+          <div
+            style={{display: this.state.showItems ? 'block' : 'none'}}
+            className="select-box--items"
+          >
+            {
+              this.state.items.map(item => <div
+                key={ item.id }
+                onClick={() => this.selectItem(item)}
+                className={this.state.selectedItem === item ? 'selected' : ''}
+              >
+                { item.value }
+              </div>)
+            }
+          </div>
         </div>
       </div>
+      <input
+        type="hidden"
+        value={this.state.selectedItem.id}
+        name={this.state.name}
+      />
     </div>
   }
 }

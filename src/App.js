@@ -7,12 +7,14 @@ function App() {
       <h1>Custom Select Box using ReactJS</h1>
       <div style={{margin: '16px', position: 'relative'}}>
         <SelectBox
-          items={[
-            { value: 'United States', id: 1 },
-            { value: 'Mexico', id: 2 },
-            { value: 'Canada', id: 3 }
-          ]}
-        />
+        width={200}
+        name="country_id"
+        items={[
+          { value: 'United States', id: 1 },
+          { value: 'Mexico', id: 2 },
+          { value: 'Canada', id: 3 }
+        ]}
+      />
       </div>
     </div>
   );
